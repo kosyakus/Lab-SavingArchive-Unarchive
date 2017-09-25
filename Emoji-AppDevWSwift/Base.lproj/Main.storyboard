@@ -70,6 +70,7 @@
                                     <outlet property="descriptionLabel" destination="Bda-FJ-PsM" id="dBO-Yf-55D"/>
                                     <outlet property="nameLabel" destination="boa-cH-IZT" id="rBf-60-ywg"/>
                                     <outlet property="symbolLabel" destination="A1N-SX-yq3" id="j0l-gc-OgL"/>
+                                    <segue destination="EEV-ff-Zef" kind="show" identifier="EditEmoji" id="Eeo-Uj-ibr"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -78,7 +79,13 @@
                             <outlet property="delegate" destination="f9x-FQ-I8J" id="cK3-7j-DCq"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="qOI-Pw-rkL"/>
+                    <navigationItem key="navigationItem" title="Root View Controller" id="qOI-Pw-rkL">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="eFH-rY-JqD">
+                            <connections>
+                                <segue destination="YSD-eu-ZrH" kind="presentation" id="kS2-1k-Pd8"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zLV-d0-LKn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -146,4 +153,7 @@
             <point key="canvasLocation" x="-504" y="120"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="Eeo-Uj-ibr"/>
+    </inferredMetricsTieBreakers>
 </document>
