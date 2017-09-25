@@ -9,6 +9,8 @@
 import UIKit
 
 class AddEditEmojiTableViewController: UITableViewController {
+    
+    var emoji: Emoji?
 
     override func viewDidLoad() {
         super.viewDidLoad()
