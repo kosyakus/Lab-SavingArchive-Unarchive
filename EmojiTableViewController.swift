@@ -10,19 +10,19 @@ import UIKit
 
 class EmojiTableViewController: UITableViewController {
     
-    var emojis: [Emoji] = [
-        Emoji(symbol:"🍋", name: "Lemon", description: "It is a fruit", usage: "Add to tea"),
-        Emoji(symbol:"🥑", name: "Avocado", description: "It is a vegetable", usage: "Add to salads"),
-        Emoji(symbol:"🥕", name: "Carrot", description: "It is a vegetable", usage: "Add to soup"),
-        Emoji(symbol:"🍌", name: "Banana", description: "It is a fruit", usage: "Eat on breakfast"),
-        Emoji(symbol:"🧀", name: "Cheese", description: "It is a food", usage: "Add to spagetty")
-    ]
+    var emojis = [Emoji]()
     
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        if let savedEmojis = Emoji.loadFromFile() {
+            emojis = savedEmojis
+        } else {
+            emojis = Emoji.loadSampleEmojis()
+        }
+        
         navigationItem.leftBarButtonItem = editButtonItem
         
         // row height should be determined automatically (also compression resistance should be changed in storyboard to 751 and 572 for name and descr)
@@ -32,6 +32,7 @@ class EmojiTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
     
+      
     override func viewWillAppear(_ animated: Bool) {
         tableView.reloadData()
     }
@@ -59,13 +60,16 @@ class EmojiTableViewController: UITableViewController {
 
         let emoji = emojis[indexPath.row]
                 
-        //cell.textLabel?.text = "\(emoji.symbol) - \(emoji.name)"
-        //cell.detailTextLabel?.text = emoji.description
-
         cell.update(with: emoji)
         cell.showsReorderControl = true // reorder cells
 
         return cell
+    }
+    
+    @IBAction func editButtonTapped(_ sender: UIBarButtonItem) {
+        let tableViewEditingMode = tableView.isEditing
+        
+        tableView.setEditing(!tableViewEditingMode, animated: true)
     }
     
     
@@ -84,6 +88,8 @@ class EmojiTableViewController: UITableViewController {
         return true
     }
     */
+    
+    
 
     
     // Override to support editing the table view.
@@ -93,7 +99,8 @@ class EmojiTableViewController: UITableViewController {
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+        }
+        Emoji.saveToFile(emojis: emojis)
     }
     
     
@@ -108,8 +115,10 @@ class EmojiTableViewController: UITableViewController {
         let movedEmoji = emojis.remove(at: fromIndexPath.row)
         emojis.insert(movedEmoji, at: to.row)
         tableView.reloadData()
+        Emoji.saveToFile(emojis: emojis)
         
     }
+    
     
 // in storyboard change the Refresh to "Enabled", refr controll will appear. then connect it to this method
     @IBAction func refreshControlActivated(_ sender: UIRefreshControl) {
@@ -142,6 +151,7 @@ class EmojiTableViewController: UITableViewController {
                 tableView.insertRows(at: [newIndexPath], with: .automatic)
             }
         }
+        Emoji.saveToFile(emojis: emojis)
     }
     
 
