@@ -17,6 +17,8 @@ class AddEditEmojiTableViewController: UITableViewController {
     @IBOutlet weak var descriptionTextField: UITextField!
     @IBOutlet weak var usageTextField: UITextField!
     
+    @IBOutlet weak var saveButton: UIBarButtonItem!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // check if emoji has a value. if it does, then edit existing emoji
@@ -27,6 +29,7 @@ class AddEditEmojiTableViewController: UITableViewController {
             usageTextField.text = emoji.usage
         }
         
+        updateSaveButtonState()
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
 
@@ -37,15 +40,7 @@ class AddEditEmojiTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
-    }
+    
 
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -92,14 +87,33 @@ class AddEditEmojiTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        super.prepare(for: segue, sender: sender)
+        
+        guard segue.identifier == "saveUnwind" else {return}
+        
+        let symbol = symbolTextField.text ?? " "
+        let name = nameTextField.text ?? ""
+        let description = descriptionTextField.text ?? ""
+        let usage = usageTextField.text ?? ""
+        emoji = Emoji(symbol: symbol, name: name, description: description, usage: usage)
     }
-    */
+    
+    
+    func updateSaveButtonState() {
+        let symbolText = symbolTextField.text ?? ""
+        let nameText = nameTextField.text ?? ""
+        let descriptionText = descriptionTextField.text ?? ""
+        let usageText = usageTextField.text ?? ""
+        saveButton.isEnabled = !symbolText.isEmpty && !nameText.isEmpty && !descriptionText.isEmpty && !usageText.isEmpty
+    }
+    
+    // to check the filling of the text fields after every char
+    @IBAction func textEditingChanged(_ sender: UITextField) {
+        updateSaveButtonState()
+    }
 
 }

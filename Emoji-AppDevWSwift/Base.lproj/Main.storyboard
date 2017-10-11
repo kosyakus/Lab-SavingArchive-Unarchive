@@ -114,6 +114,9 @@
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="textEditingChanged:" destination="EEV-ff-Zef" eventType="editingChanged" id="AUt-6B-YX0"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -142,6 +145,9 @@
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="textEditingChanged:" destination="EEV-ff-Zef" eventType="editingChanged" id="OOd-Bm-9PJ"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -170,6 +176,9 @@
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="textEditingChanged:" destination="EEV-ff-Zef" eventType="editingChanged" id="XmW-Mg-edA"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -198,6 +207,9 @@
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="textEditingChanged:" destination="EEV-ff-Zef" eventType="editingChanged" id="jhW-Yx-rNV"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -218,15 +230,28 @@
                             <outlet property="delegate" destination="EEV-ff-Zef" id="DUr-kr-iKP"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="DBr-Sk-FhU"/>
+                    <navigationItem key="navigationItem" title="Root View Controller" id="DBr-Sk-FhU">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="V7T-Mo-4aS">
+                            <connections>
+                                <segue destination="cmI-6P-UUj" kind="unwind" unwindAction="unwindToEmojiTableViewWithSegue:" id="hZX-1v-i8H"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="e2K-4m-ItC">
+                            <connections>
+                                <segue destination="cmI-6P-UUj" kind="unwind" identifier="saveUnwind" unwindAction="unwindToEmojiTableViewWithSegue:" id="tqG-8c-UdG"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="descriptionTextField" destination="Pf6-eg-m0G" id="hmN-Th-6r2"/>
                         <outlet property="nameTextField" destination="ueK-Ov-zqM" id="v3Y-Y6-U2S"/>
+                        <outlet property="saveButton" destination="e2K-4m-ItC" id="S2v-oc-bBn"/>
                         <outlet property="symbolTextField" destination="rOV-zi-fdV" id="Izz-0c-3g1"/>
                         <outlet property="usageTextField" destination="vRV-Ef-M6X" id="VvA-7n-YIO"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ODg-pt-N4G" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="cmI-6P-UUj" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2170" y="119"/>
         </scene>
