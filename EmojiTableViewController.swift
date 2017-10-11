@@ -111,15 +111,11 @@ class EmojiTableViewController: UITableViewController {
         
     }
     
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
+// in storyboard change the Refresh to "Enabled", refr controll will appear. then connect it to this method
+    @IBAction func refreshControlActivated(_ sender: UIRefreshControl) {
+        tableView.reloadData()
+        sender.endRefreshing() // this line ends the animation
     }
-    */
-
     
     // MARK: - Navigation
 
