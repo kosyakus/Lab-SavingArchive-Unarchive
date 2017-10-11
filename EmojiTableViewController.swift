@@ -25,10 +25,10 @@ class EmojiTableViewController: UITableViewController {
 
         navigationItem.leftBarButtonItem = editButtonItem
         
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+        // row height should be determined automatically (also compression resistance should be changed in storyboard to 751 and 572 for name and descr)
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 44.0
+        
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
     
